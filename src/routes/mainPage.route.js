@@ -1,9 +1,8 @@
 const express = require('express');
 const categoryRouter = require("./category.route");
 const router = express.Router();
-const mainPageController = require('../../assets/js/mainPageController');
 const category = require('../models/category.model');
-const egg = require('../models/egg.model');
+const Egg = require('../models/newegg.model');
 
 router.use('/', categoryRouter);
 
@@ -16,8 +15,12 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
+    let eggs =  await Egg.find().sort({date: -1}).limit(3).catch(err => {res.status(err.status).json(err.message)})
+    eggs.forEach(egg => {
+        egg.date = egg.date.toLocaleDateString();
+    })
     res.render('pages/mainPage', {
-        eggs: mainPageController.get3NewestEggs(await egg.getEggs().catch(err => {res.status(err.status).json(err.message)})),
+        eggs: eggs,
         categories: await category.getCategories()
     });
 })

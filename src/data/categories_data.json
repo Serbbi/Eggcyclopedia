@@ -1,1 +1,27 @@
-[{"name":"Primordial","id":0,"number_eggs":1},{"id":1,"name":"Medieval","number_eggs":0},{"id":2,"name":"Fantasy","number_eggs":0},{"id":3,"name":"Basic","number_eggs":0},{"id":4,"name":"Precious","number_eggs":0}]
+[
+  {
+    "name": "Primordial",
+    "id": 0,
+    "number_eggs": 1
+  },
+  {
+    "id": 1,
+    "name": "Medieval",
+    "number_eggs": 0
+  },
+  {
+    "id": 2,
+    "name": "Fantasy",
+    "number_eggs": 0
+  },
+  {
+    "id": 3,
+    "name": "Basic",
+    "number_eggs": 0
+  },
+  {
+    "id": 4,
+    "name": "Precious",
+    "number_eggs": 0
+  }
+]

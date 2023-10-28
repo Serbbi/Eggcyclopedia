@@ -3,6 +3,7 @@ const eggRouter = require('./egg.route');
 const router = express.Router({mergeParams: true});
 const categories = require('../models/category.model');
 const eggs = require('../models/egg.model');
+const Egg = require('../models/newegg.model');
 
 router.use('/:category/', eggRouter);
 
@@ -19,7 +20,9 @@ router.get('/:category', async (req, res) => {
 });
 
 router.post('/:category', (req, res) => {
-    eggs.postEgg(req.body).then(r => res.json(r));
+    const newEgg = new Egg(req.body);
+    console.log(newEgg);
+    newEgg.save().then(r => res.json(r));
 });
 
 router.put('/:category', async (req, res) => {
