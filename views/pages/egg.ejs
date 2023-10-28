@@ -28,7 +28,7 @@
             <p>Desire: <%= egg[property]%></p>
         <%}%>
         <% if(property === "date") { %>
-            <p>Discovered: <%= egg[property]%></p>
+            <p>Discovered: <%= egg[property].toLocaleDateString()%></p>
         <%}%>
     <% })%>
 </div>

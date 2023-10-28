@@ -32,7 +32,7 @@
             <td><%= egg.name %></td>
             <td><%= egg.image %></td>
             <td><%= egg.desire %></td>
-            <td><%= egg.date %></td>
+            <td><%= egg.date.toLocaleDateString() %></td>
         </tr>
     <%})%>
 </table>

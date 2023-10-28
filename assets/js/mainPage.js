@@ -11,8 +11,8 @@ function updateTable(categories) {
         const category2 = categories[i + 1];
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${category1.name} | ${category1.number_eggs} eggs</td>
-            ${category2 ? `<td>${category2.name} | ${category2.number_eggs} eggs</td>` : ''}
+            <td>${category1.name} | ${category1.eggs.length} eggs</td>
+            ${category2 ? `<td>${category2.name} | ${category2.eggs.length} eggs</td>` : ''}
         `;
 
         table.appendChild(row);

@@ -44,6 +44,7 @@ function createEggDetailsObject() {
     addEggFormInputs.forEach(input => {
         eggDetails[input.name] = input.value;
     });
+    eggDetails["date"] = new Date();
     eggDetails["categoryId"] = currentCategory._id;
     return eggDetails;
 }
@@ -63,7 +64,7 @@ function updateTable(eggs) {
             <td>${egg.name}</td>
             <td>${egg.image}</td>
             <td>${egg.desire}</td>
-            <td>${egg.date}</td>
+            <td>${egg.date.toLocaleDateString()}</td>
         `;
         table.appendChild(row);
     });
@@ -89,6 +90,7 @@ function addEgg(eggDetails) {
 addEggForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addEgg(createEggDetailsObject());
+    modal.style.display = "none";
 });
 
 editCategoryForm.addEventListener("submit", (e) => {

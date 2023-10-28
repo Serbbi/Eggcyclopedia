@@ -23,7 +23,7 @@
             <tr>
                 <td><%= category.name %> | <%= category.eggs.length %> eggs</td>
                 <% if (nextCategory) { %>
-                    <td><%= nextCategory.name %> | <%= category.eggs.length %> eggs</td>
+                    <td><%= nextCategory.name %> | <%= nextCategory.eggs.length %> eggs</td>
                 <% } %>
             </tr>
         <% } %>
@@ -42,7 +42,7 @@
         <li>
             <img src="<%= egg.image %>" alt="Egg Image">
             <strong><%= egg.name %></strong>
-            <p>Discovered: <%= egg.date %></p>
+            <p>Discovered: <%= egg.date.toLocaleDateString() %></p>
         </li>
     <% }); %>
 </ul>

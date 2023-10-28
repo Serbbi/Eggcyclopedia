@@ -20,8 +20,7 @@ const eggSchema = new mongoose.Schema({
         type: String
     },
     date: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     published: {
         type: Date,

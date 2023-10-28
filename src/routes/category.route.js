@@ -18,17 +18,16 @@ router.get('/:category', async (req, res) => {
     }
 });
 
-router.post('/:category', (req, res) => {
+router.post('/:category', async (req, res) => {
     const newEgg = new Egg(req.body);
-    newEgg.save().then(r => res.json(r));
-    Category.findOneAndUpdate({name: req.params.category}, {$push: {eggs: newEgg._id}}, {new: true})
-        .then(r => res.json(r))
+    await newEgg.save().then(r => res.json(r)).catch(err => console.log(err));
+    await Category.findOneAndUpdate({name: req.params.category}, {$push: {eggs: newEgg._id}}, {new: true})
         .catch(err => console.log(err));
 });
 
 router.put('/:category', async (req, res) => {
     const categoryName = req.params.category
-    Category.findOneAndUpdate({name: categoryName}, req.body, {new: true})
+    await Category.findOneAndUpdate({name: categoryName}, req.body, {new: true})
         .then(r => res.json(r))
         .catch(err => {
             if (err.status) {
@@ -39,7 +38,7 @@ router.put('/:category', async (req, res) => {
 });
 
 router.delete('/:category', async (req, res) => {
-    Category.deleteOne({name: req.params.category})
+    await Category.deleteOne({name: req.params.category})
         .then(r => res.json(r))
         .catch(err => {
             if (err.status) {

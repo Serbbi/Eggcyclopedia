@@ -16,12 +16,8 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    let eggs =  await Egg.find().sort({date: -1}).limit(3).catch(err => {res.status(err.status).json(err.message)})
-    eggs.forEach(egg => {
-        egg.date = egg.date.toLocaleDateString();
-    })
     res.render('pages/mainPage', {
-        eggs: eggs,
+        eggs: await Egg.find().sort({date: -1}).limit(3).catch(err => console.log(err)),
         categories: await Category.find().catch(err => {res.status(err.status).json(err.message)})
     });
 })
