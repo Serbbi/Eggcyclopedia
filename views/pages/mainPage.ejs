@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../assets/css/mainPage.css">
+    <script src="../../assets/js/mainPage.js" defer></script>
+    <title>Egg Encyclopedia</title>
+</head>
+<body>
+<h1>Eggcyclopedia</h1>
+<p>Here you can find all the information about eggs you need!</p>
+<div class="table_button_wrapper">
+    <table class="table">
+        <% for (let i = 0; i < categories.length; i += 2) { %>
+            <% let category = categories[i]; %>
+            <% let nextCategory = categories[i + 1]; %>
+            <tr>
+                <td><%= category.name %> | <%= category.number_eggs%> eggs</td>
+                <% if (nextCategory) { %>
+                    <td><%= nextCategory.name %> | <%= nextCategory.number_eggs %> eggs</td>
+                <% } %>
+            </tr>
+        <% } %>
+    </table>
+    <button class="show_form_button" onclick="showForm()">Add category</button>
+    <form class="form">
+        <label>
+            <input type="text" id="category_name">
+        </label>
+        <button type="submit">Save</button>
+    </form>
+</div>
+<h2>New eggies</h2>
+<ul class="list">
+    <% eggs.forEach(function(egg) { %>
+        <li>
+            <img src="<%= egg.image %>" alt="Egg Image">
+            <strong><%= egg.name %></strong>
+            <p>Discovered: <%= egg.date %></p>
+        </li>
+    <% }); %>
+</ul>
+</body>
+</html>

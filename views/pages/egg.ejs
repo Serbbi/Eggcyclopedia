@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../assets/css/egg.css">
+    <script src="../../assets/js/egg.js" defer></script>
+    <title>Egg</title>
+</head>
+<body>
+<% if (egg) { %>
+    <script>
+        const currentEgg = <%- JSON.stringify(egg) %>
+    </script>
+<% } %>
+<div class="card">
+    <img src="<%= egg.image %>" alt="Egg Image">
+    <h1><%= egg.name%></h1>
+    <% Object.keys(egg).forEach(property => {%>
+        <% if(property === "categoryId" || property === "name" || property === "image") return %>
+        <% if(property === "description") { %>
+            <p>Description: <%= egg[property]%></p>
+        <%}%>
+        <% if(property === "desire") { %>
+            <p>Desire: <%= egg[property]%></p>
+        <%}%>
+        <% if(property === "date") { %>
+            <p>Discovered: <%= egg[property]%></p>
+        <%}%>
+    <% })%>
+</div>
+<div class="modal">
+    <form class="edit_egg_form">
+        <label>
+            <input id="name" name="name" type="text" placeholder="Name" value="<%= egg.name %>">
+        </label>
+        <label>
+            <input id="description" name="description" type="text" placeholder="Description" value="<%= egg.description%>">
+        </label>
+        <label>
+            <input id="image" name="image" type="text" placeholder="Image" value="<%= egg.image%>">
+        </label>
+        <label>
+            <input id="desire" name="desire" type="text" placeholder="Desire" value="<%= egg.desire %>">
+        </label>
+        <label>
+            <input id="date" name="date" type="text" placeholder="Date" value="<%= egg.date %>">
+        </label>
+        <button type="submit">Save</button>
+    </form>
+</div>
+<div class="buttons">
+    <button onclick="showFormEditEgg()">Edit</button>
+    <button onclick="deleteEgg()">Delete</button>
+</div>
+</body>
+</html>

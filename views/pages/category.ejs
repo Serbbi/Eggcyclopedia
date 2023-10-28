@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../assets/css/category.css">
+    <script src="../../assets/js/category.js" defer></script>
+    <title>Category</title>
+</head>
+<body>
+<% if (category && eggs) { %>
+    <script>
+        const currentCategory = <%- JSON.stringify(category) %>
+        const currentEggs = <%- JSON.stringify(eggs) %>
+    </script>
+<% } %>
+<h1 class="header"><%= category.name %></h1>
+<div class="buttons_form_wrapper">
+    <div class="edit_form_wrapper">
+        <button onclick="showFormEditCategory()">Edit</button>
+        <form class="edit_category_form">
+            <label>
+                <input value=<%= category.name %> id="name" type="text">
+            </label>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <button onclick="deleteCategory()">Delete</button>
+</div>
+<table class="table">
+    <% eggs.forEach(egg => { %>
+        <tr>
+            <td><%= egg.name %></td>
+            <td><%= egg.image %></td>
+            <td><%= egg.desire %></td>
+            <td><%= egg.date %></td>
+        </tr>
+    <%})%>
+</table>
+<button onclick="showFormAddEgg()">Add egg</button>
+<div class="modal">
+    <form class="add_egg_form">
+        <label>
+            <input id="name" name="name" type="text" placeholder="Name">
+        </label>
+        <label>
+            <input id="description" name="description" type="text" placeholder="Description">
+        </label>
+        <label>
+            <input id="image" name="image" type="text" placeholder="Image">
+        </label>
+        <label>
+            <input id="desire" name="desire" type="text" placeholder="Desire">
+        </label>
+        <label>
+            <input id="date" name="date" type="text" placeholder="Date">
+        </label>
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>

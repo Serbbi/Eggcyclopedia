@@ -1,0 +1,93 @@
+:root {
+    --kaki: #8D8741;
+    --blue: #659DBD;
+    --clay: #DAAD86;
+    --earth: #BC986A;
+    --sand: #FBEEC1;
+    --text: #252525;
+}
+
+body {
+    background-color: var(--blue);
+    color: var(--text);
+}
+
+.edit_category_form {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    font-size: 3rem;
+}
+
+.buttons_form_wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+td {
+    cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    border: whitesmoke 2px solid;
+}
+
+tr:hover {
+    background-color: var(--clay);
+}
+
+table {
+    border-collapse: collapse;
+    width: 50rem;
+    background-color: var(--earth);
+    margin: auto;
+    border: whitesmoke 2px solid;
+    overflow: scroll;
+}
+
+button {
+    background-color: var(--kaki);
+    color: whitesmoke;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.add_egg_form {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    & input {
+        background-color: #e3fff4;
+        border: none;
+        color: #2a3236;
+        margin: 5px;
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 10px;
+    }
+}

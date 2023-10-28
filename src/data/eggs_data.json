@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Fire Egg",
+    "description": "A fire egg is a mystical and rare magical artifact resembling an ordinary egg but infused with potent elemental energy. Its shell glows with vibrant hues of red, orange, and yellow, resembling flickering flames. When activated, the fire egg releases intense heat and fiery bursts, making it a source of both illumination and warmth. Legends suggest that these eggs are hatched from ancient dragon nests, harnessing the essence of fire within their core. Fire eggs are often sought after by wizards and adventurers for their powerful properties, used in rituals, alchemy, and occasionally as companions for those skilled enough to handle their blazing temperament.",
+    "image": "../../assets/images/fireEgg.png",
+    "desire": "Make popcorn.",
+    "date": "1540-49-12",
+    "categoryId": 0,
+    "published": "2023-10-24T09:45:04.447Z"
+  },
+  {
+    "name": "Musketeer",
+    "description": "A musketeer egg is a remarkable and enigmatic artifact resembling a finely crafted, ornate egg adorned with intricate designs reminiscent of a bygone era. Its surface is adorned with intricate engravings, depicting scenes of chivalry and daring swordfights. When held, the egg exudes an aura of bravery and confidence.  Legend has it that musketeer eggs are infused with the spirit of gallant musketeers from ancient times. When activated, these eggs grant their owner extraordinary swordsmanship skills, keen strategic insight, and unparalleled marksmanship. Possessing a musketeer egg is often seen as a mark of honor and distinction, and those who own one are believed to be destined for great adventures and heroic deeds.  The musketeer egg dreams of a world where honor, loyalty, and justice prevail. It desires to be in the hands of a noble and valiant soul, someone who upholds the ideals of honor and chivalry. In its dreams, the musketeer egg envisions itself being part of epic battles, where its owner fights valiantly against injustice and tyranny, defending the weak and standing up for what is right.  Above all, the musketeer egg longs for a partner who shares its sense of honor and courage, someone who will wield its powers responsibly and with a noble heart. Together, they would embark on daring quests, facing formidable foes and ensuring that the spirit of the musketeers lives on through their heroic endeavors.",
+    "image": "../../assets/images/musketeerEgg.png",
+    "desire": "It wants 2 friends.",
+    "date": "1769-10-07",
+    "categoryId": 1,
+    "published": "2023-10-24T10:24:26.752Z"
+  }
+]
