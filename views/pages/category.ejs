@@ -30,7 +30,7 @@
     <% eggs.forEach(egg => { %>
         <tr>
             <td><%= egg.name %></td>
-            <td><%= egg.image %></td>
+            <td><img src="<%= egg.image %>" alt="No image"></td>
             <td><%= egg.desire %></td>
             <td><%= egg.date.toLocaleDateString() %></td>
         </tr>
@@ -46,7 +46,7 @@
             <input id="description" name="description" type="text" placeholder="Description">
         </label>
         <label>
-            <input id="image" name="image" type="text" placeholder="Image">
+            <input id="image" name="image" type="file">
         </label>
         <label>
             <input id="desire" name="desire" type="text" placeholder="Desire">

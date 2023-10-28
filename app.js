@@ -2,13 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const mainPageRouter = require("./src/routes/mainPage.route");
 const { mongoose } = require("mongoose");
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 app.use('/assets', express.static(__dirname + '/assets'));
-app.use(express.json());
 
 app.use('/', mainPageRouter);
 

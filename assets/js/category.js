@@ -9,6 +9,15 @@ function showFormEditCategory() {
     editCategoryForm.style.display = 'inline-block';
 }
 
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
 function editCategory(categoryName) {
     fetch(`/${currentCategory.name}`, {
         method: 'PUT',
@@ -39,13 +48,18 @@ function deleteCategory() {
         .catch(err => console.log(err));
 }
 
-function createEggDetailsObject() {
+async function createEggDetailsObject() {
     const eggDetails = {};
-    addEggFormInputs.forEach(input => {
+    for (const input of addEggFormInputs) {
+        if(input.name === 'image') {
+            eggDetails[input.name] = await toBase64(input.files[0]);
+            continue;
+        }
         eggDetails[input.name] = input.value;
-    });
+    }
     eggDetails["date"] = new Date();
     eggDetails["categoryId"] = currentCategory._id;
+    console.log(eggDetails);
     return eggDetails;
 }
 
@@ -62,9 +76,9 @@ function updateTable(eggs) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${egg.name}</td>
-            <td>${egg.image}</td>
+            <td><img src="${egg.image}" alt="No Image"></td>
             <td>${egg.desire}</td>
-            <td>${egg.date.toLocaleDateString()}</td>
+            <td>${new Date(egg.date).toLocaleDateString()}</td>
         `;
         table.appendChild(row);
     });
@@ -87,9 +101,9 @@ function addEgg(eggDetails) {
         .catch(err => console.log(err));
 }
 
-addEggForm.addEventListener("submit", (e) => {
+addEggForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    addEgg(createEggDetailsObject());
+    addEgg(await createEggDetailsObject());
     modal.style.display = "none";
 });
 

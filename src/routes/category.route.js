@@ -19,8 +19,13 @@ router.get('/:category', async (req, res) => {
 });
 
 router.post('/:category', async (req, res) => {
+    let success = false;
     const newEgg = new Egg(req.body);
-    await newEgg.save().then(r => res.json(r)).catch(err => console.log(err));
+    await newEgg.save().then(r => {
+        success = true;
+        res.json(r)
+    }).catch(err => console.log(err));
+    if(!success) return;
     await Category.findOneAndUpdate({name: req.params.category}, {$push: {eggs: newEgg._id}}, {new: true})
         .catch(err => console.log(err));
 });
