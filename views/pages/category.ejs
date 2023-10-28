@@ -9,8 +9,8 @@
 <body>
 <% if (category && eggs) { %>
     <script>
-        const currentCategory = <%- JSON.stringify(category) %>
-        const currentEggs = <%- JSON.stringify(eggs) %>
+        const currentCategory = <%- JSON.stringify(category) %>;
+        let currentEggs = <%- JSON.stringify(eggs) %>;
     </script>
 <% } %>
 <h1 class="header"><%= category.name %></h1>

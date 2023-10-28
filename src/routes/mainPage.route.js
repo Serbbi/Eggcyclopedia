@@ -1,17 +1,18 @@
 const express = require('express');
 const categoryRouter = require("./category.route");
 const router = express.Router();
-const category = require('../models/category.model');
-const Egg = require('../models/newegg.model');
+const Egg = require('../models/egg.model');
+const Category = require('../models/category.model');
 
 router.use('/', categoryRouter);
 
 router.post('/', async (req, res) => {
-    category.postCategory(req.body)
-        .then(categories => {res.json(categories)})
+    let newCategory = new Category(req.body);
+    newCategory.save()
+        .then(r => res.json(r))
         .catch(err => {
             res.status(err.status).json(err.message);
-        })
+        });
 })
 
 router.get('/', async (req, res) => {
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
     })
     res.render('pages/mainPage', {
         eggs: eggs,
-        categories: await category.getCategories()
+        categories: await Category.find().catch(err => {res.status(err.status).json(err.message)})
     });
 })
 

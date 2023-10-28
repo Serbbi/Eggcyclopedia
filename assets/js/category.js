@@ -44,7 +44,7 @@ function createEggDetailsObject() {
     addEggFormInputs.forEach(input => {
         eggDetails[input.name] = input.value;
     });
-    eggDetails["categoryId"] = currentCategory.id;
+    eggDetails["categoryId"] = currentCategory._id;
     return eggDetails;
 }
 
@@ -56,7 +56,7 @@ function updateTable(eggs) {
     table.innerHTML = '';
 
     eggs.forEach(egg => {
-        if(egg.categoryId !== currentCategory.id) return;
+        if(egg.categoryId !== currentCategory._id) return;
 
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -80,7 +80,8 @@ function addEgg(eggDetails) {
         .then(response => response.json())
         .then(data => {
             console.log('Egg added:', data);
-            updateTable(data);
+            currentEggs.push(data);
+            updateTable(currentEggs);
         })
         .catch(err => console.log(err));
 }

@@ -7,6 +7,12 @@
     <title>Egg Encyclopedia</title>
 </head>
 <body>
+<% if (categories && eggs) { %>
+    <script>
+        let currentCategories = <%- JSON.stringify(categories) %>
+        let currentEggs = <%- JSON.stringify(eggs) %>
+    </script>
+<% } %>
 <h1>Eggcyclopedia</h1>
 <p>Here you can find all the information about eggs you need!</p>
 <div class="table_button_wrapper">
@@ -15,9 +21,9 @@
             <% let category = categories[i]; %>
             <% let nextCategory = categories[i + 1]; %>
             <tr>
-                <td><%= category.name %> | <%= category.number_eggs%> eggs</td>
+                <td><%= category.name %> | <%= category.eggs.length %> eggs</td>
                 <% if (nextCategory) { %>
-                    <td><%= nextCategory.name %> | <%= nextCategory.number_eggs %> eggs</td>
+                    <td><%= nextCategory.name %> | <%= category.eggs.length %> eggs</td>
                 <% } %>
             </tr>
         <% } %>

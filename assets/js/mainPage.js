@@ -30,7 +30,7 @@ function createCategory(categoryName) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: categoryName, number_eggs: 0 })
+        body: JSON.stringify({ name: categoryName, eggs: [] })
     })
         .then(response => response.json())
         .then(data => {
@@ -38,7 +38,8 @@ function createCategory(categoryName) {
                 return;
             }
             console.log('Category created:', data);
-            updateTable(data);
+            currentCategories.push(data);
+            updateTable(currentCategories);
             resetForm();
         })
         .catch(error => {
