@@ -7,12 +7,14 @@ const Category = require('../models/category.model');
 router.use('/:category/', eggRouter);
 
 router.get('/:category', async (req, res) => {
-    const category = await Category.findOne({name: req.params.category}).catch(err => console.log(err));
+    const categories = await Category.find().catch(err => console.log(err));
+    const category = categories.find(category => category.name === req.params.category);
     if(!category) {
         res.status(404).send("Category not found");
     } else {
         res.render('pages/category', {
             category: category,
+            categories: categories,
             eggs: await Egg.find({categoryId: category._id}).catch(err => console.log(err))
         });
     }

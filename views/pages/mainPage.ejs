@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../assets/css/mainPage.css">
-    <script src="../../assets/js/mainPage.js" defer></script>
+    <script type="module" src="../../assets/js/mainPage.js" defer></script>
     <title>Egg Encyclopedia</title>
 </head>
 <body>
@@ -28,7 +28,7 @@
             </tr>
         <% } %>
     </table>
-    <button class="show_form_button" onclick="showForm()">Add category</button>
+    <button class="show_form_button">Add category</button>
     <form class="form">
         <label>
             <input type="text" id="category_name">
@@ -39,8 +39,8 @@
 <h2>New eggies</h2>
 <ul class="list">
     <% eggs.forEach(function(egg) { %>
-        <li>
-            <img src="<%= egg.image %>" alt="Egg Image">
+        <li class="card">
+            <img src="<%= egg.image %>" alt="Egg Image" class="card">
             <strong><%= egg.name %></strong>
             <p>Discovered: <%= egg.date.toLocaleDateString() %></p>
         </li>

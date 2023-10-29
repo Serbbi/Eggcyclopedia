@@ -1,9 +1,43 @@
+import { validateCategoryForm } from "./categoryFormValidator.js";
+
 const modal = document.querySelector('.modal');
 const editCategoryForm = document.querySelector('.edit_category_form');
+const editCategoryButton = document.querySelector('.edit_category_button');
 const editCategoryFormInput = document.querySelector('.edit_category_form input');
 const addEggForm = document.querySelector('.add_egg_form');
 const addEggFormInputs = document.querySelectorAll('.add_egg_form input');
+const addEggButton = document.querySelector('.add_egg_button');
+const deleteCategoryButton = document.querySelector('.delete_category_button');
 const table = document.querySelector('.table');
+
+function compressImage(file) {
+    return new Promise((resolve, reject) => {
+        const blobURL = URL.createObjectURL(file);
+        const img = new Image();
+        img.src = blobURL;
+
+        img.onload = function () {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            canvas.toBlob(
+                (blob) => {
+                    const compressed = new File([blob], file.name, { type: 'image/jpeg' });
+                    resolve(compressed);
+                },
+                'image/jpeg',
+                0.7
+            );
+        };
+
+        img.onerror = function (error) {
+            reject(error);
+        };
+    });
+}
+
 
 function showFormEditCategory() {
     editCategoryForm.style.display = 'inline-block';
@@ -52,7 +86,7 @@ async function createEggDetailsObject() {
     const eggDetails = {};
     for (const input of addEggFormInputs) {
         if(input.name === 'image') {
-            eggDetails[input.name] = await toBase64(input.files[0]);
+            eggDetails[input.name] = await toBase64(await compressImage(input.files[0]));
             continue;
         }
         eggDetails[input.name] = input.value;
@@ -101,14 +135,19 @@ function addEgg(eggDetails) {
         .catch(err => console.log(err));
 }
 
+addEggButton.addEventListener("click", showFormAddEgg);
+
 addEggForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     addEgg(await createEggDetailsObject());
     modal.style.display = "none";
 });
 
+editCategoryButton.addEventListener("click", showFormEditCategory);
+
 editCategoryForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    if(!validateCategoryForm(editCategoryFormInput.value, currentCategories)) return;
     editCategory(editCategoryFormInput.value);
 });
 
@@ -118,6 +157,8 @@ table.addEventListener("click", (e) => {
         window.location.href = `/${currentCategory.name}/${eggName}`;
     }
 });
+
+deleteCategoryButton.addEventListener("click", deleteCategory);
 
 window.onclick = function(event) {
     if (event.target === modal) {

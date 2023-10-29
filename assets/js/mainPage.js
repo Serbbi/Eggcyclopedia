@@ -1,3 +1,5 @@
+import { validateCategoryForm } from "./categoryFormValidator.js";
+
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form input");
 const table = document.querySelector(".table");
@@ -53,6 +55,7 @@ function showForm() {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+    if (!validateCategoryForm(formInput.value, currentCategories)) return;
     createCategory(formInput.value);
 });
 
@@ -68,3 +71,5 @@ document.addEventListener("click", (e) => {
         resetForm();
     }
 });
+
+showFormButton.addEventListener("click", showForm);
