@@ -5,13 +5,15 @@ const Category = require('../models/category.model');
 let eggId = 0;
 
 router.get('/:egg', async (req, res) => {
-    const egg = await Egg.findOne({name: req.params.egg});
+    const eggs = await Egg.find();
+    const egg = eggs.find(egg => egg.name === req.params.egg);
     if(!egg) {
         res.status(404).send("Egg not found");
     } else {
         eggId = egg._id;
         res.render('pages/egg', {
-            egg: egg._doc
+            egg: egg._doc,
+            eggs: eggs
         });
     }
 });

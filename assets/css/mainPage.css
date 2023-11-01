@@ -1,5 +1,6 @@
 :root {
     --kaki: #8D8741;
+    --lightkaki: #b9b255;
     --blue: #659DBD;
     --clay: #DAAD86;
     --earth: #BC986A;
@@ -11,13 +12,16 @@ body {
     background-color: var(--blue);
     font-family: 'Roboto', sans-serif;
     color: var(--text);
+    min-width: 500px;
 }
 
 h1 {
     text-align: center;
-    margin: 0;
     padding: 20px;
     font-size: 3rem;
+    background-color: #252525;
+    color: whitesmoke;
+    margin: 20px;
 }
 
 form {
@@ -29,6 +33,7 @@ td {
     text-align: center;
     padding: 5px;
     border: whitesmoke 2px solid;
+    width: 50%;
 }
 
 td:hover {
@@ -36,12 +41,12 @@ td:hover {
 }
 
 table {
-    border-collapse: collapse;
-    width: 50rem;
+    width: 100%;
     background-color: var(--earth);
-    margin: auto;
     border: whitesmoke 2px solid;
     overflow: scroll;
+    border-spacing: 0;
+    border-collapse: separate;
 }
 
 button {
@@ -51,7 +56,26 @@ button {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px;
+    margin: 20px 0 0 0;
+    font-weight: bold;
+}
+
+input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: var(--lightkaki);
+}
+
+.table_button_wrapper {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -81,6 +105,7 @@ li {
     position: relative;
     min-width: 100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 
     & img {
         width: 90%;

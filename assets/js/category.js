@@ -1,4 +1,6 @@
-import { validateCategoryForm } from "./categoryFormValidator.js";
+import { validateCategoryForm } from "./utils/categoryFormValidator.js";
+import { compressImage } from "./utils/imageCompresser.js";
+import { validateEggForm } from "./utils/eggFormValidator.js";
 
 const modal = document.querySelector('.modal');
 const editCategoryForm = document.querySelector('.edit_category_form');
@@ -9,35 +11,6 @@ const addEggFormInputs = document.querySelectorAll('.add_egg_form input');
 const addEggButton = document.querySelector('.add_egg_button');
 const deleteCategoryButton = document.querySelector('.delete_category_button');
 const table = document.querySelector('.table');
-
-function compressImage(file) {
-    return new Promise((resolve, reject) => {
-        const blobURL = URL.createObjectURL(file);
-        const img = new Image();
-        img.src = blobURL;
-
-        img.onload = function () {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            canvas.toBlob(
-                (blob) => {
-                    const compressed = new File([blob], file.name, { type: 'image/jpeg' });
-                    resolve(compressed);
-                },
-                'image/jpeg',
-                0.7
-            );
-        };
-
-        img.onerror = function (error) {
-            reject(error);
-        };
-    });
-}
-
 
 function showFormEditCategory() {
     editCategoryForm.style.display = 'inline-block';
@@ -86,14 +59,15 @@ async function createEggDetailsObject() {
     const eggDetails = {};
     for (const input of addEggFormInputs) {
         if(input.name === 'image') {
+            if(!input.files[0]) continue;
             eggDetails[input.name] = await toBase64(await compressImage(input.files[0]));
             continue;
         }
         eggDetails[input.name] = input.value;
     }
+    console.log(eggDetails["date"]);
     eggDetails["date"] = new Date();
     eggDetails["categoryId"] = currentCategory._id;
-    console.log(eggDetails);
     return eggDetails;
 }
 
@@ -109,10 +83,10 @@ function updateTable(eggs) {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${egg.name}</td>
-            <td><img src="${egg.image}" alt="No Image"></td>
-            <td>${egg.desire}</td>
-            <td>${new Date(egg.date).toLocaleDateString()}</td>
+            <td class="td-image">${egg.name}</td>
+            <td class="td-name"><img src="${egg.image}" alt="No Image"></td>
+            <td class="td-desire">${egg.desire}</td>
+            <td class="td-discovered">${new Date(egg.date).toLocaleDateString()}</td>
         `;
         table.appendChild(row);
     });
@@ -139,7 +113,9 @@ addEggButton.addEventListener("click", showFormAddEgg);
 
 addEggForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    addEgg(await createEggDetailsObject());
+    const eggDetails = await createEggDetailsObject();
+    if(!validateEggForm(eggDetails, currentEggs)) return;
+    addEgg(eggDetails);
     modal.style.display = "none";
 });
 
@@ -153,7 +129,7 @@ editCategoryForm.addEventListener("submit", (e) => {
 
 table.addEventListener("click", (e) => {
     if (e.target.tagName === "TD") {
-        const eggName = e.target.parentElement.children[0].innerText;
+        const eggName = e.target.parentElement.children[1].innerText;
         window.location.href = `/${currentCategory.name}/${eggName}`;
     }
 });

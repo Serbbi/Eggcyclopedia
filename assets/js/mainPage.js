@@ -1,9 +1,11 @@
-import { validateCategoryForm } from "./categoryFormValidator.js";
+import { validateCategoryForm } from "./utils/categoryFormValidator.js";
+import { calculateRoute } from "./utils/calculateRoute.js";
 
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form input");
 const table = document.querySelector(".table");
 const showFormButton = document.querySelector(".show_form_button");
+const list = document.querySelector(".list");
 
 function updateTable(categories) {
     table.innerHTML = '';
@@ -14,7 +16,7 @@ function updateTable(categories) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${category1.name} | ${category1.eggs.length} eggs</td>
-            ${category2 ? `<td>${category2.name} | ${category2.eggs.length} eggs</td>` : ''}
+            ${category2 ? `<td>${category2.name} | ${category2.eggs.length} eggs</td>` : `<td></td>`}
         `;
 
         table.appendChild(row);
@@ -73,3 +75,15 @@ document.addEventListener("click", (e) => {
 });
 
 showFormButton.addEventListener("click", showForm);
+
+list.addEventListener("click", (e) => {
+    let eggName = '';
+    if (e.target.tagName === "IMG") {
+        eggName = e.target.parentElement.children[1].innerHTML;
+    }
+    if (e.target.tagName === "LI") {
+        eggName = e.target.children[1].innerHTML;
+    }
+    if (eggName === '') return;
+    window.location.href = calculateRoute(eggName, currentEggs, currentCategories);
+})

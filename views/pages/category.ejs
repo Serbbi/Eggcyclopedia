@@ -15,29 +15,39 @@
     </script>
 <% } %>
 <h1 class="header"><%= category.name %></h1>
-<div class="buttons_form_wrapper">
-    <div class="edit_form_wrapper">
-        <button class="edit_category_button">Edit</button>
-        <form class="edit_category_form">
-            <label>
-                <input value=<%= category.name %> id="name" type="text">
-            </label>
-            <button type="submit">Save</button>
-        </form>
+<div class="table_wrapper">
+    <div class="buttons_form_wrapper">
+        <div class="edit_form_wrapper">
+            <button class="edit_category_button">Edit</button>
+            <form class="edit_category_form">
+                <label>
+                    <input value=<%= category.name %> id="name" type="text">
+                </label>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+        <button class="delete_category_button">Delete</button>
     </div>
-    <button class="delete_category_button">Delete</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="th-image"></th>
+                <th class="th-name">Egg Name</th>
+                <th class="th-desire">Desire</th>
+                <th class="th-discovered">Discovered Date</th>
+            </tr>
+        </thead>
+        <% eggs.forEach(egg => { %>
+            <tr>
+                <td class="td-image"><img src="<%= egg.image %>" alt="No image"></td>
+                <td class="td-name"><%= egg.name %></td>
+                <td class="td-desire"><%= egg.desire %></td>
+                <td class="td-discovered"><%= egg.date.toLocaleDateString() %></td>
+            </tr>
+        <%})%>
+    </table>
+    <button class="add_egg_button">Add egg</button>
 </div>
-<table class="table">
-    <% eggs.forEach(egg => { %>
-        <tr>
-            <td><%= egg.name %></td>
-            <td><img src="<%= egg.image %>" alt="No image"></td>
-            <td><%= egg.desire %></td>
-            <td><%= egg.date.toLocaleDateString() %></td>
-        </tr>
-    <%})%>
-</table>
-<button class="add_egg_button">Add egg</button>
 <div class="modal">
     <form class="add_egg_form">
         <label>

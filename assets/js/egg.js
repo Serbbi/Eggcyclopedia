@@ -1,6 +1,10 @@
+import { validateEggForm } from "./utils/eggFormValidator.js";
+
 const modal = document.querySelector('.modal');
 const editEggForm = document.querySelector('.edit_egg_form');
 const editEggFormInputs = document.querySelectorAll('.edit_egg_form input');
+const editEggButton = document.querySelector('.edit_egg_button');
+const deleteEggButton = document.querySelector('.delete_egg_button');
 
 function showFormEditEgg() {
     modal.style.display = 'block';
@@ -14,13 +18,13 @@ function createEggDetailsObject() {
     return eggDetails;
 }
 
-function editEgg() {
+function editEgg(eggDetails) {
     fetch(window.location.href, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(createEggDetailsObject())
+        body: JSON.stringify(eggDetails)
     })
         .then(response => response.json())
         .then(data => {
@@ -46,9 +50,15 @@ function deleteEgg() {
         .catch(err => console.log(err));
 }
 
+editEggButton.addEventListener('click', showFormEditEgg);
+
+deleteEggButton.addEventListener('click', deleteEgg);
+
 editEggForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    editEgg();
+    const eggDetails = createEggDetailsObject();
+    if(!validateEggForm(eggDetails, currentEggs)) return;
+    editEgg(eggDetails);
 });
 
 window.onclick = function(event) {

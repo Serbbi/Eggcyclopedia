@@ -24,7 +24,9 @@
                 <td><%= category.name %> | <%= category.eggs.length %> eggs</td>
                 <% if (nextCategory) { %>
                     <td><%= nextCategory.name %> | <%= nextCategory.eggs.length %> eggs</td>
-                <% } %>
+                <% } else { %>
+                    <td></td>
+                <% }%>
             </tr>
         <% } %>
     </table>
