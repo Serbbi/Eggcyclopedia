@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: var(--blue);
+    background-color: var(--sand);
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: var(--text);
@@ -21,11 +21,10 @@ body {
     margin: 20px auto;
     width: 400px;
     height: 400px;
-    border-radius: 20px;
-    background-color: var(--sand);
+    background-color: whitesmoke;
     position: relative;
     overflow: scroll;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
 }
@@ -45,13 +44,18 @@ p, h1{
 }
 
 button {
-    background-color: var(--kaki);
+    background-color: var(--blue);
     color: whitesmoke;
+    font-weight: bold;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
+}
+
+button:hover {
+    background-color: #8ebcd9;
 }
 
 .modal {
@@ -73,24 +77,122 @@ form {
     margin: auto;
     padding: 20px;
     width: 50%;
+    min-width: 330px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
     & input {
-        background-color: #e3fff4;
-        border: none;
+        border: darkgray 1px solid;
+        width: 80%;
         color: #2a3236;
         margin: 5px;
         padding: 10px 20px;
         text-align: center;
-        border-radius: 10px;
     }
+
+    & input:hover {
+        background-color: #e2e2e2;
+    }
+}
+
+.form_buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+
+    & button {
+        margin: 5px;
+        width: 40%;
+    }
+}
+
+.cancel_button {
+    background-color: #e2e2e2;
+    color: #2a3236;
+
+    &:hover {
+        background-color: #d4d4d4;
+    }
+}
+
+.card_wrapper {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 500px;
+    height: 90vh;
+    margin: auto;
+    padding: 20px;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-around;
-    width: 400px;
-    margin: 0 auto;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.header_wrapper {
+    display: flex;
+    background-color: #252525;
+    margin: 20px;
+    align-items: center;
+    justify-content: space-between;
+
+    & a {
+        & i {
+            padding: 0;
+        }
+        text-decoration: none;
+        color: whitesmoke;
+        padding: 20px;
+        font-size: 2.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    & a:hover {
+        color: #c5c5c5;
+    }
+
+    & h1 {
+        text-align: center;
+        padding: 20px;
+        font-size: 3rem;
+        color: whitesmoke;
+        margin: 0;
+    }
+
+    & i {
+        color: whitesmoke;
+        padding: 20px;
+        font-size: 2.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+
+    & i:hover {
+        color: #c5c5c5;
+        cursor: pointer;
+    }
+}
+
+/* Hide scrollbar for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* scrollbar-track-color scrollbar-thumb-color */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, newer versions of Opera) */
+*::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: transparent; /* color of the thumb */
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent; /* color of the track */
 }

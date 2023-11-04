@@ -13,7 +13,8 @@ router.get('/:egg', async (req, res) => {
         eggId = egg._id;
         res.render('pages/egg', {
             egg: egg._doc,
-            eggs: eggs
+            eggs: eggs,
+            previousPage: req.originalUrl.substring(0, req.originalUrl.lastIndexOf('/'))
         });
     }
 });

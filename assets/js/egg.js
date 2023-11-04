@@ -1,20 +1,30 @@
 import { validateEggForm } from "./utils/eggFormValidator.js";
+import { toBase64 } from "./utils/imageToBase64.js";
+import { compressImage } from "./utils/imageCompresser.js";
 
 const modal = document.querySelector('.modal');
 const editEggForm = document.querySelector('.edit_egg_form');
 const editEggFormInputs = document.querySelectorAll('.edit_egg_form input');
 const editEggButton = document.querySelector('.edit_egg_button');
 const deleteEggButton = document.querySelector('.delete_egg_button');
+const cancelButton = document.querySelector('.cancel_button');
+const changeThemeButton = document.querySelector('.fas');
 
 function showFormEditEgg() {
     modal.style.display = 'block';
 }
 
-function createEggDetailsObject() {
+async function createEggDetailsObject() {
     const eggDetails = {};
-    editEggFormInputs.forEach(input => {
+    for (const input of editEggFormInputs) {
+        if(input.name === 'image') {
+            if(!input.files[0]) continue;
+            eggDetails[input.name] = await toBase64(await compressImage(input.files[0]));
+            continue;
+        }
         eggDetails[input.name] = input.value;
-    });
+    }
+    if(!eggDetails.image) delete eggDetails.image;
     return eggDetails;
 }
 
@@ -52,13 +62,24 @@ function deleteEgg() {
 
 editEggButton.addEventListener('click', showFormEditEgg);
 
-deleteEggButton.addEventListener('click', deleteEgg);
+deleteEggButton.addEventListener('click', () => {
+    if(!confirm('Are you sure you want to delete this egg?')) return;
+    deleteEgg();
+});
 
-editEggForm.addEventListener('submit', (e) => {
+cancelButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+editEggForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const eggDetails = createEggDetailsObject();
-    if(!validateEggForm(eggDetails, currentEggs)) return;
+    const eggDetails = await createEggDetailsObject();
+    if (!validateEggForm(eggDetails, currentEggs, currentEgg.name)) return;
     editEgg(eggDetails);
+});
+
+changeThemeButton.addEventListener('click', () => {
+    alert('You like clicking on eggs I see ;)');
 });
 
 window.onclick = function(event) {

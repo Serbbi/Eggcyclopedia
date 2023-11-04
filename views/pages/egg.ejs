@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../assets/css/egg.css">
     <script type="module" src="../../assets/js/egg.js" defer></script>
+    <script src="https://kit.fontawesome.com/db27c17fae.js" crossorigin="anonymous"></script>
     <title>Egg</title>
 </head>
 <body>
@@ -13,45 +14,45 @@
         const currentEggs = <%- JSON.stringify(eggs) %>;
     </script>
 <% } %>
-<div class="card">
-    <img src="<%= egg.image %>" alt="Egg Image">
-    <h1><%= egg.name%></h1>
-    <% Object.keys(egg).forEach(property => {%>
-        <% if(property === "categoryId" || property === "name" || property === "image") return %>
-        <% if(property === "description") { %>
-            <p>Description: <%= egg[property]%></p>
-        <%}%>
-        <% if(property === "desire") { %>
-            <p>Desire: <%= egg[property]%></p>
-        <%}%>
-        <% if(property === "date") { %>
-            <p>Discovered: <%= egg[property].toLocaleDateString()%></p>
-        <%}%>
-    <% })%>
+<div class="header_wrapper">
+    <a href="<%= previousPage %>"><i class="fa fa-arrow-left"></i></a>
+    <h1><%= egg.name %></h1>
+    <i class='fas fa-egg'></i>
+</div>
+<div class="card_wrapper">
+    <div class="card">
+        <img src="<%= egg.image %>" alt="Egg Image">
+        <h1><%= egg.name%></h1>
+        <% Object.keys(egg).forEach(property => {%>
+            <% if(property === "categoryId" || property === "name" || property === "image") return %>
+            <% if(property === "description") { %>
+                <p>Description: <%= egg[property]%></p>
+            <%}%>
+            <% if(property === "desire") { %>
+                <p>Desire: <%= egg[property]%></p>
+            <%}%>
+            <% if(property === "date") { %>
+                <p>Discovered: <%= egg[property].toLocaleDateString()%></p>
+            <%}%>
+        <% })%>
+    </div>
+    <div class="buttons">
+        <button class="edit_egg_button">Edit</button>
+        <button class="delete_egg_button">Delete</button>
+    </div>
 </div>
 <div class="modal">
     <form class="edit_egg_form">
-        <label>
-            <input id="name" name="name" type="text" placeholder="Name" value="<%= egg.name %>">
-        </label>
-        <label>
-            <input id="description" name="description" type="text" placeholder="Description" value="<%= egg.description%>">
-        </label>
-        <label>
-            <input id="image" name="image" type="text" placeholder="Image" value="<%= egg.image%>">
-        </label>
-        <label>
-            <input id="desire" name="desire" type="text" placeholder="Desire" value="<%= egg.desire %>">
-        </label>
-        <label>
-            <input id="date" name="date" type="text" placeholder="Date" value="<%= egg.date %>">
-        </label>
-        <button type="submit">Save</button>
+        <input id="name" name="name" type="text" placeholder="Name" value="<%= egg.name %>">
+        <input id="description" name="description" type="text" placeholder="Description" value="<%= egg.description%>">
+        <input id="image" name="image" type="file">
+        <input id="desire" name="desire" type="text" placeholder="Desire" value="<%= egg.desire %>">
+        <input id="date" name="date" type="text" placeholder="Discovered Date" onfocus="(this.type='date')" value="<%= egg.date.toLocaleDateString()%>">
+        <div class="form_buttons">
+            <button type="button" class="cancel_button">Cancel</button>
+            <button type="submit">Save</button>
+        </div>
     </form>
-</div>
-<div class="buttons">
-    <button class="edit_egg_button">Edit</button>
-    <button class="delete_egg_button">Delete</button>
 </div>
 </body>
 </html>
