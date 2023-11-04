@@ -14,6 +14,7 @@ const addEggButton = document.querySelector('.add_egg_button');
 const cancelButton = document.querySelector('.cancel_button');
 const deleteCategoryButton = document.querySelector('.delete_category_button');
 const table = document.querySelector('.table');
+const changeThemeButton = document.querySelector('.fas');
 
 function resetAddEggForm() {
     for (const input of addEggFormInputs) {
@@ -165,6 +166,10 @@ deleteCategoryButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
     modal.style.display = "none";
     resetAddEggForm();
+});
+
+changeThemeButton.addEventListener("click", () => {
+    alert('You found an easter egg :P')
 });
 
 window.onclick = function(event) {
