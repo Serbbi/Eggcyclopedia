@@ -1,6 +1,8 @@
 import { validateCategoryForm } from "./utils/categoryFormValidator.js";
 import { compressImage } from "./utils/imageCompresser.js";
 import { validateEggForm } from "./utils/eggFormValidator.js";
+import { sortEggsByParam } from "./utils/sortEggs.js";
+import { toBase64 } from "./utils/imageToBase64.js";
 
 const modal = document.querySelector('.modal');
 const editCategoryForm = document.querySelector('.edit_category_form');
@@ -9,20 +11,18 @@ const editCategoryFormInput = document.querySelector('.edit_category_form input'
 const addEggForm = document.querySelector('.add_egg_form');
 const addEggFormInputs = document.querySelectorAll('.add_egg_form input');
 const addEggButton = document.querySelector('.add_egg_button');
+const cancelButton = document.querySelector('.cancel_button');
 const deleteCategoryButton = document.querySelector('.delete_category_button');
 const table = document.querySelector('.table');
 
-function showFormEditCategory() {
-    editCategoryForm.style.display = 'inline-block';
+function resetAddEggForm() {
+    for (const input of addEggFormInputs) {
+        input.value = '';
+    }
 }
 
-function toBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
+function showFormEditCategory() {
+    editCategoryForm.style.display = 'inline-block';
 }
 
 function editCategory(categoryName) {
@@ -40,6 +40,19 @@ function editCategory(categoryName) {
             window.location.href = `/${categoryName}`;
         })
         .catch(err => console.log(err));
+}
+
+function deleteEggs() {
+    for (let i = 0; i < currentEggs.length; i++) {
+        fetch(`/${currentCategory.name}/${currentEggs[i].name}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Egg deleted:', data);
+            })
+            .catch(err => console.log(err));
+    }
 }
 
 function deleteCategory() {
@@ -65,8 +78,11 @@ async function createEggDetailsObject() {
         }
         eggDetails[input.name] = input.value;
     }
-    console.log(eggDetails["date"]);
-    eggDetails["date"] = new Date();
+    if (!eggDetails["date"]) {
+        eggDetails["date"] = new Date();
+    } else {
+        eggDetails["date"] = new Date(eggDetails["date"]);
+    }
     eggDetails["categoryId"] = currentCategory._id;
     return eggDetails;
 }
@@ -76,19 +92,19 @@ function showFormAddEgg() {
 }
 
 function updateTable(eggs) {
-    table.innerHTML = '';
+    table.children[1].innerHTML = '';
 
     eggs.forEach(egg => {
         if(egg.categoryId !== currentCategory._id) return;
 
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td class="td-image">${egg.name}</td>
-            <td class="td-name"><img src="${egg.image}" alt="No Image"></td>
+            <td class="td-image"><img src="${egg.image}" alt="No Image"></td>
+            <td class="td-name">${egg.name}</td>
             <td class="td-desire">${egg.desire}</td>
             <td class="td-discovered">${new Date(egg.date).toLocaleDateString()}</td>
         `;
-        table.appendChild(row);
+        table.children[1].appendChild(row);
     });
 }
 
@@ -117,6 +133,7 @@ addEggForm.addEventListener("submit", async (e) => {
     if(!validateEggForm(eggDetails, currentEggs)) return;
     addEgg(eggDetails);
     modal.style.display = "none";
+    resetAddEggForm();
 });
 
 editCategoryButton.addEventListener("click", showFormEditCategory);
@@ -132,12 +149,30 @@ table.addEventListener("click", (e) => {
         const eggName = e.target.parentElement.children[1].innerText;
         window.location.href = `/${currentCategory.name}/${eggName}`;
     }
+    if(e.target.tagName === "TH") {
+        currentEggs = sortEggsByParam(e.target.innerText, currentEggs);
+        updateTable(currentEggs);
+    }
 });
 
-deleteCategoryButton.addEventListener("click", deleteCategory);
+deleteCategoryButton.addEventListener("click", () => {
+    if(confirm('Are you sure you want to delete this category? \nThis will also delete all the eggs under this category.')) {
+        deleteEggs();
+        deleteCategory();
+    }
+});
+
+cancelButton.addEventListener("click", () => {
+    modal.style.display = "none";
+    resetAddEggForm();
+});
 
 window.onclick = function(event) {
     if (event.target === modal) {
         modal.style.display = "none";
+        resetAddEggForm();
+    }
+    if (!editCategoryForm.contains(event.target) && event.target !== editCategoryButton) {
+        editCategoryForm.style.display = "none";
     }
 }

@@ -8,7 +8,6 @@ export function validateEggForm(eggDetails, currentEggs) {
         return false;
     }
 
-
     return true;
 
 }

@@ -37,6 +37,7 @@
                 <th class="th-discovered">Discovered Date</th>
             </tr>
         </thead>
+        <tbody>
         <% eggs.forEach(egg => { %>
             <tr>
                 <td class="td-image"><img src="<%= egg.image %>" alt="No image"></td>
@@ -45,27 +46,21 @@
                 <td class="td-discovered"><%= egg.date.toLocaleDateString() %></td>
             </tr>
         <%})%>
+        </tbody>
     </table>
     <button class="add_egg_button">Add egg</button>
 </div>
 <div class="modal">
     <form class="add_egg_form">
-        <label>
-            <input id="name" name="name" type="text" placeholder="Name">
-        </label>
-        <label>
-            <input id="description" name="description" type="text" placeholder="Description">
-        </label>
-        <label>
-            <input id="image" name="image" type="file">
-        </label>
-        <label>
-            <input id="desire" name="desire" type="text" placeholder="Desire">
-        </label>
-        <label>
-            <input id="date" name="date" type="text" placeholder="Date">
-        </label>
-        <button type="submit">Save</button>
+        <input id="name" name="name" type="text" placeholder="Name">
+        <input id="description" name="description" type="text" placeholder="Description">
+        <input id="image" name="image" type="file">
+        <input id="desire" name="desire" type="text" placeholder="Desire">
+        <input id="date" name="date" type="text" placeholder="Discovered Date" onfocus="(this.type='date')">
+        <div class="form_buttons">
+            <button type="button" class="cancel_button">Cancel</button>
+            <button type="submit">Save</button>
+        </div>
     </form>
 </div>
 </body>
