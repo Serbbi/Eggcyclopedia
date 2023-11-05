@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     res.render('pages/mainPage', {
-        eggs: await Egg.find().sort({date: -1}).limit(3).catch(err => console.log(err)),
+        eggs: await Egg.find().sort({published: -1}).limit(3).catch(err => console.log(err)),
         categories: await Category.find().catch(err => {res.status(err.status).json(err.message)})
     });
 })

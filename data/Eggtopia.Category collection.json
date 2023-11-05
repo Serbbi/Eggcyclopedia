@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "653fea04ad467b4d29defee7"
+  },
+  "name": "Primordial",
+  "eggs": [
+    {
+      "$oid": "654548f042e45f6effbce238"
+    },
+    {
+      "$oid": "6545491a42e45f6effbce23d"
+    },
+    {
+      "$oid": "6545492d42e45f6effbce242"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "6547ab79c2590a2e2e5dd84b"
+  },
+  "name": "Basic",
+  "eggs": [
+    {
+      "$oid": "6547b3f3daa36a1ec010ce3c"
+    },
+    {
+      "$oid": "6547b494daa36a1ec010ce42"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6547ab81c2590a2e2e5dd84d"
+  },
+  "name": "Medieval",
+  "eggs": [
+    {
+      "$oid": "6547b6c2305dfb3fee085bf5"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6547abc8c2590a2e2e5dd854"
+  },
+  "name": "Fruits",
+  "eggs": [
+    {
+      "$oid": "6547b585305dfb3fee085bea"
+    },
+    {
+      "$oid": "6547b661305dfb3fee085bed"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6547abd4c2590a2e2e5dd856"
+  },
+  "name": "Precious",
+  "eggs": [
+    {
+      "$oid": "6547b72b305dfb3fee085bfd"
+    }
+  ],
+  "__v": 0
+}]
