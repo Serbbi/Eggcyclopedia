@@ -8,7 +8,7 @@ const showFormButton = document.querySelector(".show_form_button");
 const list = document.querySelector(".list");
 
 function updateTable(categories) {
-    table.innerHTML = '';
+    table.children[0].innerHTML = '';
 
     for (let i = 0; i < categories.length; i += 2) {
         const category1 = categories[i];
@@ -19,7 +19,7 @@ function updateTable(categories) {
             ${category2 ? `<td>${category2.name} | ${category2.eggs.length} eggs</td>` : `<td></td>`}
         `;
 
-        table.appendChild(row);
+        table.children[0].appendChild(row);
     }
 }
 

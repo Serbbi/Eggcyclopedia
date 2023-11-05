@@ -17,6 +17,7 @@
 <p>Here you can find all the information about eggs you need!</p>
 <div class="table_button_wrapper">
     <table class="table">
+        <tbody>
         <% for (let i = 0; i < categories.length; i += 2) { %>
             <% let category = categories[i]; %>
             <% let nextCategory = categories[i + 1]; %>
@@ -29,6 +30,7 @@
                 <% }%>
             </tr>
         <% } %>
+        </tbody>
     </table>
     <button class="show_form_button">Add category</button>
     <form class="form">

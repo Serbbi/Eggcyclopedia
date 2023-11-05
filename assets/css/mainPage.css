@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: var(--blue);
+    background-color: var(--sand);
     font-family: 'Roboto', sans-serif;
     color: var(--text);
     min-width: 500px;
@@ -31,33 +31,46 @@ form {
 td {
     cursor: pointer;
     text-align: center;
-    padding: 5px;
-    border: whitesmoke 2px solid;
+    padding: 30px;
     width: 50%;
 }
 
 td:hover {
-    background-color: var(--clay);
+    background-color: rgb(224, 224, 224);
+}
+
+tr {
+    border: none;
+    background-color: whitesmoke;
+}
+
+tbody {
+    display: inline-table;
+    width: 100%;
 }
 
 table {
     width: 100%;
-    background-color: var(--earth);
-    border: whitesmoke 2px solid;
-    overflow: scroll;
-    border-spacing: 0;
     border-collapse: separate;
+    border-spacing: 0 10px;
+    max-height: 300px;
+    overflow-y:scroll;
+    display:block;
 }
 
 button {
-    background-color: var(--kaki);
+    background-color: var(--blue);
     color: whitesmoke;
+    font-weight: bold;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 20px 0 0 0;
-    font-weight: bold;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #8ebcd9;
 }
 
 input {
@@ -65,10 +78,6 @@ input {
     border-radius: 5px;
     border: none;
     margin: 5px;
-}
-
-button:hover {
-    background-color: var(--lightkaki);
 }
 
 .table_button_wrapper {
@@ -80,9 +89,11 @@ button:hover {
 
 h2 {
     text-align: center;
-    margin: 0;
+    margin: 20px;
     padding: 20px;
     font-size: 2rem;
+    background-color: #252525;
+    color: whitesmoke;
 }
 
 ul {
@@ -90,14 +101,15 @@ ul {
     justify-content: center;
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 80%;
 }
 
 li {
     margin: 10px;
-    background-color: var(--clay);
+    background-color: whitesmoke;
     padding: 10px 10px 30px;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,5 +137,24 @@ li {
 
 p {
     text-align: center;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* scrollbar-track-color scrollbar-thumb-color */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, newer versions of Opera) */
+*::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: transparent; /* color of the thumb */
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent; /* color of the track */
 }
 
