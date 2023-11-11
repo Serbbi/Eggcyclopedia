@@ -8,11 +8,16 @@ To get started with Eggcyclopedia:
 2. Create a `.env` file in the root directory
 3. Add the following environment variables to the `.env` file:
 ```
-MONGODB_URI=<your MongoDB URI>
+MONGO_URI=<your MongoDB URI>
 PORT=<your desired port>
 ```
 4. Run `npm install` to install dependencies
 5. Run `npm run start` to start the server
 6. Navigate to `localhost:<your port>` to view the app
+
+## Extras
+
+You can add some sample data to your database by running `npm run pop` AFTER you first start
+the project so that the collections in the database get created.
 
 Thank you for being a part of Eggcyclopedia! Happy egg exploring! 🥚🍳
